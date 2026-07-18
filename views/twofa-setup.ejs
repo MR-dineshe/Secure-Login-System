@@ -1,0 +1,37 @@
+<%- include('partials/head', { pageTitle, appName }) %>
+<%- include('partials/nav', { pageTitle, appName, currentUser }) %>
+
+<section class="dashboard-grid setup-grid">
+  <article class="panel panel-highlight">
+    <p class="eyebrow">Enable 2FA</p>
+    <h2>Scan the QR code with an authenticator app</h2>
+    <p>
+      Add this account to Google Authenticator, Microsoft Authenticator, 1Password, or a compatible app for <strong><%= email %></strong>.
+    </p>
+    <div class="qr-wrap">
+      <img src="<%= qrCodeDataUrl %>" alt="Authenticator QR code">
+    </div>
+    <p class="secret-line">Manual secret: <span><%= secret %></span></p>
+  </article>
+
+  <article class="panel">
+    <p class="eyebrow">Confirm setup</p>
+    <h3>Enter the current 6-digit code</h3>
+
+    <form class="form-grid compact" action="/2fa/setup" method="POST" novalidate>
+      <% if (formError) { %>
+        <div class="alert alert-error"><%= formError %></div>
+      <% } %>
+
+      <label>
+        Authenticator code
+        <input type="text" name="token" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" value="<%= values.token %>" required>
+      </label>
+
+      <button class="button button-primary" type="submit">Enable 2FA</button>
+      <p class="form-note">If the code refreshes, wait for the next one and submit it once.</p>
+    </form>
+  </article>
+</section>
+
+<%- include('partials/footer') %>

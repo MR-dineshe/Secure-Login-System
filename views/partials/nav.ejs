@@ -1,0 +1,19 @@
+<header class="topbar">
+  <div>
+    <p class="eyebrow">Secure Login System</p>
+    <h1><%= pageTitle || appName %></h1>
+  </div>
+
+  <% if (currentUser) { %>
+    <form action="/logout" method="POST" class="inline-form">
+      <button class="button button-secondary" type="submit">Logout</button>
+    </form>
+  <% } else { %>
+    <a class="button button-secondary" href="/login">Sign in</a>
+  <% } %>
+</header>
+
+<main class="content">
+  <% if (flash) { %>
+    <div class="alert alert-<%= flash.type %>"><%= flash.message %></div>
+  <% } %>

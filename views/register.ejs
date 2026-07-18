@@ -1,0 +1,41 @@
+<%- include('partials/head', { pageTitle, appName }) %>
+<%- include('partials/nav', { pageTitle, appName, currentUser }) %>
+
+<section class="hero-card auth-card">
+  <div class="hero-copy">
+    <p class="eyebrow">Get started</p>
+    <h2>Create an account with guarded inputs and hashed passwords</h2>
+    <p>
+      The app uses parameterized SQL statements, session regeneration, and secure cookie settings.
+    </p>
+  </div>
+
+  <form class="form-grid" action="/register" method="POST" novalidate>
+    <% if (formError) { %>
+      <div class="alert alert-error"><%= formError %></div>
+    <% } %>
+
+    <label>
+      Email
+      <input type="email" name="email" value="<%= values.email %>" autocomplete="email" required>
+    </label>
+
+    <label>
+      Password
+      <input type="password" name="password" minlength="12" autocomplete="new-password" required>
+    </label>
+
+    <label>
+      Confirm password
+      <input type="password" name="confirmPassword" minlength="12" autocomplete="new-password" required>
+    </label>
+
+    <button class="button button-primary" type="submit">Create account</button>
+
+    <p class="form-note">
+      Already registered? <a href="/login">Sign in</a>
+    </p>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

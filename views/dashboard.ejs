@@ -1,0 +1,54 @@
+<%- include('partials/head', { pageTitle, appName }) %>
+<%- include('partials/nav', { pageTitle, appName, currentUser }) %>
+
+<section class="dashboard-grid">
+  <article class="panel panel-highlight">
+    <p class="eyebrow">Signed in as</p>
+    <h2><%= currentUser.email %></h2>
+    <p>Your session is active and protected with signed cookies and regeneration on sign in.</p>
+  </article>
+
+  <article class="panel">
+    <div class="panel-header">
+      <div>
+        <p class="eyebrow">Account security</p>
+        <h3>Two-factor authentication</h3>
+      </div>
+      <span class="status <%= currentUser.twoFactorEnabled ? 'status-on' : 'status-off' %>">
+        <%= currentUser.twoFactorEnabled ? 'Enabled' : 'Disabled' %>
+      </span>
+    </div>
+
+    <% if (currentUser.twoFactorEnabled) { %>
+      <p>Two-factor authentication is active. You will be asked for a 6-digit code at sign in.</p>
+
+      <form class="form-grid compact" action="/2fa/disable" method="POST">
+        <% if (typeof formError !== 'undefined' && formError) { %>
+          <div class="alert alert-error"><%= formError %></div>
+        <% } %>
+
+        <label>
+          Confirm password to disable
+          <input type="password" name="password" autocomplete="current-password" required>
+        </label>
+
+        <button class="button button-secondary" type="submit">Disable 2FA</button>
+      </form>
+    <% } else { %>
+      <p>Enable 2FA to add a second sign-in step with a time-based authenticator app.</p>
+      <a class="button button-primary" href="/2fa/setup">Set up 2FA</a>
+    <% } %>
+  </article>
+
+  <article class="panel">
+    <p class="eyebrow">Security notes</p>
+    <ul class="feature-list">
+      <li>Password hashing uses bcryptjs with a strong work factor.</li>
+      <li>All SQL access is parameterized to prevent injection.</li>
+      <li>Login and registration are rate limited.</li>
+      <li>Sessions are httpOnly, same-site, and regenerated after authentication.</li>
+    </ul>
+  </article>
+</section>
+
+<%- include('partials/footer') %>

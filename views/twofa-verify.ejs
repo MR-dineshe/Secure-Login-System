@@ -1,0 +1,31 @@
+<%- include('partials/head', { pageTitle, appName }) %>
+<%- include('partials/nav', { pageTitle, appName, currentUser }) %>
+
+<section class="hero-card auth-card">
+  <div class="hero-copy">
+    <p class="eyebrow">Two-factor check</p>
+    <h2>Enter the 6-digit code from your authenticator app</h2>
+    <p>
+      This is required because 2FA is enabled for <strong><%= email %></strong>.
+    </p>
+  </div>
+
+  <form class="form-grid" action="/2fa/verify" method="POST" novalidate>
+    <% if (formError) { %>
+      <div class="alert alert-error"><%= formError %></div>
+    <% } %>
+
+    <label>
+      Authenticator code
+      <input type="text" name="token" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" value="<%= values.token %>" required>
+    </label>
+
+    <button class="button button-primary" type="submit">Verify code</button>
+
+    <p class="form-note">
+      Need to start over? <a href="/login">Return to sign in</a>
+    </p>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

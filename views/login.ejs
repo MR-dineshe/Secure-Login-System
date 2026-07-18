@@ -1,0 +1,37 @@
+<%- include('partials/head', { pageTitle, appName }) %>
+<%- include('partials/nav', { pageTitle, appName, currentUser }) %>
+
+<section class="hero-card auth-card">
+  <div class="hero-copy">
+    <p class="eyebrow">Welcome back</p>
+    <h2>Sign in to your secure workspace</h2>
+    <p>
+      Passwords are hashed with bcryptjs, requests are validated, sessions are protected,
+      and 2FA can be enabled after sign in.
+    </p>
+  </div>
+
+  <form class="form-grid" action="/login" method="POST" novalidate>
+    <% if (formError) { %>
+      <div class="alert alert-error"><%= formError %></div>
+    <% } %>
+
+    <label>
+      Email
+      <input type="email" name="email" value="<%= values.email %>" autocomplete="email" required>
+    </label>
+
+    <label>
+      Password
+      <input type="password" name="password" autocomplete="current-password" required>
+    </label>
+
+    <button class="button button-primary" type="submit">Sign in</button>
+
+    <p class="form-note">
+      New here? <a href="/register">Create an account</a>
+    </p>
+  </form>
+</section>
+
+<%- include('partials/footer') %>
