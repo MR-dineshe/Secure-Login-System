@@ -343,10 +343,12 @@ async function bootstrap() {
   });
 
   app.get('/dashboard', requireAuth(database), (req, res) => {
-    res.render('dashboard', {
-      pageTitle: 'Dashboard',
-    });
+  res.render('dashboard', {
+    pageTitle: 'Dashboard',
+    currentUser: req.currentUser,
+    formError: null,
   });
+});
 
   app.get('/2fa/setup', requireAuth(database), async (req, res) => {
     const currentUser = req.currentUser;
