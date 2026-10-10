@@ -52,3 +52,63 @@ A secure login web app built with Express, SQL.js, bcryptjs, sessions, and optio
 
 - `npm start` runs the server.
 - `npm run dev` starts the server with Node watch mode.
+
+# Secure Login System
+
+A security-focused authentication platform built with Express.js, SQL.js,
+bcryptjs, sessions, Zod validation, rate limiting, and optional TOTP
+two-factor authentication.
+
+## Features
+
+- User registration and login
+- bcrypt password hashing
+- Parameterized SQL queries
+- SQL injection protection
+- Server-side validation with Zod
+- Session-based authentication
+- Secure logout
+- Login and registration rate limiting
+- Optional TOTP-based 2FA
+- Secure HTTP cookies
+- Helmet security headers
+
+## Tech Stack
+
+- Node.js
+- Express.js
+- SQL.js / SQLite
+- bcryptjs
+- Zod
+- express-session
+- Helmet
+- TOTP / authenticator apps
+
+## Security
+
+This project demonstrates practical web authentication security,
+including password hashing, input validation, parameterized database
+queries, session management, rate limiting, secure cookies, and
+two-factor authentication.
+
+## Roadmap
+
+- [ ] Password reset
+- [ ] Email verification
+- [ ] Account lockout detection
+- [ ] Security event logging
+- [ ] Admin security dashboard
+- [ ] API authentication
+- [ ] Security audit/testing tools
+
+## Installation
+
+### Requirements
+
+- Node.js 18+
+- npm
+
+### Setup
+
+```bash
+npm install
